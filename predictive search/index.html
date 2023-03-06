@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ch-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSONP</title>
+  <style type="text/css">
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    a{
+      text-decoration: none;
+    }
+    .search-wrap{
+      width: 600px;
+      margin: 200px auto 0;
+      /* background-color: #ccc; */
+    }
+    .search-wrap .search{
+      outline: none;
+      width: 100%;
+      height: 44px;
+      padding: 0 0 0 8px;
+      font-size: 18px;
+      border: 1px solid #424242;
+      box-sizing: border-box;
+
+    }
+    .search-wrap .result-wrap{
+      display: none;
+      width: 100%;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .result-wrap .list-item{
+      height: 44px;
+      line-height: 44px;
+      padding-left: 8px;
+    }
+
+    .result-wrap .list-item:hover{
+      background-color: #eee;
+    }
+
+    .result-wrap .lk{
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: #424242;
+    }
+    .result-wrap .font-normal{
+      color: #999;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="search-wrap">
+    <input type="text" class="search" id="J-input"/>
+    <div class="result-wrap">
+      <ul class="result-list J-list">
+
+      </ul>
+    </div>
+  </div>
+
+
+  <script type="text/html" id="J-tpl">
+    <li class="list-item">
+      <a href="https://www.baidu.com/s?wd={{wd}}" class="lk" target="_blank">{{keyword}}</a>
+    </li>
+  </script>
+  <script type="text/html">
+    /**
+     * JSONP的全称？
+     * 
+     * JSON with Padding
+    **/
+
+    /**
+     * JSONP和JSON的关系（区别）？
+     * 
+     * 它们两个不是一个类型
+     * JSON是一种数据格式
+     * JSONP是跨域获取JSON数据的技术
+    **/
+
+    /**
+     * JSONP返回的数据格式与平常发请求获取的数据格式（客户端期望的数据格式）一样吗？
+     * 
+     * 不一样
+     * 平常发请求的数据格式是JSON数据
+     * 而JSONP返回的是将JSON数据作为参数的函数执行
+     * 客户端期望的：{"name": "张三"， "hobby": "basketball", "grad": "3"}
+     * JSONP返回的：callback({"name": "张三"， "hobby": "basketball", "grad": "3"})
+     **/
+    /**
+     * 不受同源策略影响的内容
+     * 
+     * 1. iframe 的 src
+     * 2. img 的 src
+     * 3. link 的 href  (啊，记错了，记成了a的href)
+     * 4. script 的 src
+    **/
+
+    /**
+     * 两个脚本，上面的是外部js文件引入
+     * 下面的是内部脚本块
+     * 下面的脚本能访问到上面脚本定义的变量
+     * script标签加载是阻塞的，会先加载完上面的内容，才加载下面的内容。
+    */
+
+    /**
+     * 将第一个脚本文件的后缀名改为txt,引入文件时后缀名也改为txt
+     * 下面的脚本依然能访问到上面脚本定义的变量
+     * 对于script标签来说，是什么后缀名并不重要，它会按照脚本的标准来解析里面的内容。
+     * 所以可以引入php文件
+    */
+
+    /**
+     * 调换
+     * 第一个为内部脚本块，用来定义函数
+     * 第二个为外部引入的脚本，用来执行函数，这样也是可行的。
+    */
+
+    /**
+     * 如果有多个函数
+     * 第一个为内部脚本块，定义了多个函数
+     * 第二个为外部引入的脚本，以url的方式引入，可以在url上传参，通过参数来确定执行哪个函数
+     * 
+     * 获取参数值
+     * 
+     * 1. 获取script元素的src值(var path = document.getElementById('xxxx').src)
+     * 2. 用正则匹配(path.match(/cb=(.*)/)[1]
+     * 
+     * switch语句判断
+    */
+
+    /**
+     * 外部引入的文件，不管是什么东西，script只管响应回来的内容能不能执行，如果能执行就会被执行。
+    */
+
+    /**
+     * http:test.jsplusplus.com/jsonp/jsonp.php?cb=test
+     * 传参用的键名要和后端协商，后端会获取键名后面的键值（键值是前端定义好的函数的函数名，
+     * 到时候后端会返回这个函数的执行，script标签会解析到这个函数执行）
+    */
+
+    /**
+     * 优化
+     * 动态创建并删除script标签
+    */
+
+    //www.baidu.com/sugrec?pwd=123&cb=jQuery1102018970672360585206_1669814305824&_=1669814305828
+
+    // https://www.baidu.com/sugrec?prod=pc&wd=11&cb=jQuery1102017858414062669747_1669819972978
+    // function test(str){
+    //   console.log(str);
+    // }
+  </script>
+  <script type="text/javascript" src="js/test.js"></script>
+
+</body>
+</html>

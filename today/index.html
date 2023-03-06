@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Today in history</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="search-wrap">
+      <div class="search-date">
+        <span>今天是</span>
+        <span class="date-now J_date"></span>
+        <button class="search-btn J_searchBtn">查询</button>
+      </div>
+    </div>
+    <div class="result-wrap">
+      <ul class="list J-list">
+
+      </ul>
+    </div>
+  </div>
+  <script type="text/tpl" id="J_tpl">
+    <li class="list-item">
+      <a class="lk" href="{{link}}" target="_blank">
+        <span class="year">{{year}}年</span>：<span class="title">{{title}}</sapn>
+      </a>
+    </li>
+  </script>
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
